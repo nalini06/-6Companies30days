@@ -1,0 +1,30 @@
+class Solution {
+    // this is kind of dp probl;em 
+    // 1st lets put logic we used in subset generation
+    // then optimize it with memoization
+    public boolean canPartition(int[] nums) {
+        int total = 0;
+        // if total is odd we cant parittion 
+        for(int i = 0 ; i<nums.length ; i++){
+            total+=nums[i];                                   
+        }
+        if(total%2!=0) return false;
+        // so total is even 
+        HashMap<String , Boolean> vis = new HashMap<>();
+        return isPartition(0,0,nums,total,vis);
+                      //<curr index , curr sum , total sum>
+    }
+    
+    private boolean isPartition(int ind , int sum ,int[] nums,int total , HashMap<String , Boolean> vis){
+        String str = ind+" "+sum;
+        if(vis.containsKey(str)){
+            return vis.get(str);
+        }
+        if(sum*2==total) return true;
+        if(sum>total/2 || ind>=nums.length) return false;
+         // when curr exceds half of total sum we can say it cant be partioned
+        boolean Partition = (isPartition(ind+1,sum+nums[ind],nums,total , vis) || isPartition(ind+1 , sum ,nums, total , vis));
+        vis.put(str,Partition);
+        return Partition;
+    }
+ }
