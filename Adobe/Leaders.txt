@@ -1,0 +1,24 @@
+
+class Solution{
+    //Function to find the leaders in the array.
+    static ArrayList<Integer> leaders(int arr[], int n){
+        // Your code herestatic ArrayList<Integer> leaders(int arr[], int n){
+        // Your code here
+        
+        int curr = arr[n-1];
+        ArrayList<Integer> all = new ArrayList<Integer>();
+        all.add(curr);
+        
+        for(int j = n-2 ; j>=0 ; j--){
+            
+            if(curr<=arr[j]){
+              curr = arr[j];
+              all.add(curr);
+                
+            }
+            
+        }
+        Collections.reverse(all);
+        return all;
+    }
+}
